@@ -8,7 +8,6 @@
       <script type="text/javascript">
          function WebSocketTest()
          {
-			alert("Test 1");
             if ("WebSocket" in window)
             {
                alert("WebSocket is supported by your Browser!");
@@ -51,7 +50,6 @@
 		<script type="text/javascript" charset="utf-8">
             function onLoad()
             {
-				  window.alert("Test 3");
 				  window.WebSocketTest();
                   document.addEventListener("deviceready", onDeviceReady, true);
             }
@@ -68,7 +66,7 @@
         <script type="text/javascript" src="cordova.js"></script>
 		<div id="maindiv" name="maindiv" title="Background Div Element">
 			<p>Leave this app open!</p>
-			<a color="#CCCCCC" href="WeWillRockYou_Screen-release.apk">Android</a>
+			<p>Test 5<a href="WeWillRockYou_Screen-release.apk">Android</a></p>
 			<button name="buttonClick" onclick="exitFromApp()">Exit App</button>
 		</div>
 		
@@ -77,7 +75,6 @@
 		<button onclick="window.plugins.insomnia.allowSleepAgain()">allow sleep again</button>
         -->
 		<script type="text/javascript">
-			window.alert("Test 2");
 			window.plugins.insomnia.keepAwake();
 		</script>
         <!--<script type="text/javascript" src="window.plugins.insomnia.allowSleepAgain()"></script>-->
