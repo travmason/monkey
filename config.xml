@@ -12,4 +12,5 @@
 	<platform name="ios" />
 	<platform name="android" />
 	<plugin name="cordova-plugin-insomnia" />
+	<plugin spec="https://github.com/phonegap/phonegap-plugin-push" />
 </widget>
