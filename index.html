@@ -8,12 +8,13 @@
       <script type="text/javascript">
          function WebSocketTest()
          {
+			alert("Test 1");
             if ("WebSocket" in window)
             {
                alert("WebSocket is supported by your Browser!");
                
                // Let us open a web socket
-               var ws = new WebSocket("ws://monkeyandthemoose/productionav");
+               var ws = new WebSocket("ws://monkeyandthemoose.com/productionav");
 				
                ws.onopen = function()
                {
@@ -51,7 +52,7 @@
             function onLoad()
             {
                   document.addEventListener("deviceready", onDeviceReady, true);
-				  WebSocketTest();
+				  window.WebSocketTest();
             }
 
             function exitFromApp()
