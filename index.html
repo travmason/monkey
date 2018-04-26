@@ -38,7 +38,7 @@
 		<script src="/jquery/dist/jquery.js"></script>
         <script src="/socket.io/socket.io.js"></script>
 		<script>  
-		 var socket = io.connect('http://localhost:54835');
+		 var socket = io.connect('http://monkeyandthemoose.com');
 		 socket.on('connect', function(data) {
 			socket.emit('join', 'Hello World from client');
 			socket.on('messages', function(data) {
