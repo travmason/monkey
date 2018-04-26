@@ -6,51 +6,10 @@
 		<link rel="stylesheet" href="http://www.monkeyandthemoose.com/productionav.css">
         <title>Blank App</title>
       <script type="text/javascript">
-         function WebSocketTest()
-         {
-            if ("WebSocket" in window)
-            {
-               alert("WebSocket is supported by your Browser!");
-               
-               // Let us open a web socket
-               var ws = new WebSocket("ws://monkeyandthemoose.com/productionav");
-				
-               ws.onopen = function()
-               {
-                  // Web Socket is connected, send data using send()
-                  ws.send("Message to send");
-                  alert("Message is sent...");
-               };
-				
-               ws.onmessage = function (evt) 
-               { 
-                  var received_msg = evt.data;
-                  alert("Message is received...");
-               };
-				
-               ws.onclose = function()
-               { 
-                  // websocket is closed.
-                  //alert("Connection is closed..."); 
-               };
-					
-               window.onbeforeunload = function(event) {
-                  socket.close();
-               };
-            }
-            
-            else
-            {
-               // The browser doesn't support WebSocket
-               alert("WebSocket NOT supported by your Browser!");
-            }
-         }
-      </script>
 
 		<script type="text/javascript" charset="utf-8">
             function onLoad()
             {
-				  window.WebSocketTest();
                   document.addEventListener("deviceready", onDeviceReady, true);
             }
 
@@ -64,9 +23,8 @@
     </head>
     <body onload="onLoad();" bgcolor="#FFFFFF">
         <script type="text/javascript" src="cordova.js"></script>
-		<div id="maindiv" name="maindiv" title="Background Div Element">
+		<div class="animatethis" id="maindiv" name="maindiv" title="Background animation">
 			<p>Leave this app open!</p>
-			<p>Test 5<a href="WeWillRockYou_Screen-release.apk">Android</a></p>
 			<button name="buttonClick" onclick="exitFromApp()">Exit App</button>
 		</div>
 		
@@ -77,6 +35,17 @@
 		<script type="text/javascript">
 			window.plugins.insomnia.keepAwake();
 		</script>
+		<script src="/jquery/dist/jquery.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+		<script>  
+		 var socket = io.connect('http://monkeyandthemoose.com/productionav');
+		 socket.on('connect', function(data) {
+			socket.emit('join', 'Hello World from client');
+			socket.on('messages', function(data) {
+                alert(data);
+			});
+		 });
+		</script>  
         <!--<script type="text/javascript" src="window.plugins.insomnia.allowSleepAgain()"></script>-->
 	</body>
 </html>
