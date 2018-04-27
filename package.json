@@ -1,0 +1,17 @@
+{
+  "name": "productionav",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Trav Mason",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "nosleep.js": "^0.7.0",
+    "socket.io": "^2.1.0"
+  }
+}
