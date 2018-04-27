@@ -8,7 +8,7 @@
         Trav
     </author>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="*.monkeyandthemoose.com" />
 	<platform name="ios" />
 	<platform name="android" />
 	<plugin name="cordova-plugin-insomnia" />
