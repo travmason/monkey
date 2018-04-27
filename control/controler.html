@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Controller for Radio Ga Ga</title>
+		<script>
+			function runAnim(action) {
+				socket.emit('controller', action);
+			}
+		</script>
+    </head>
+    <body onload="onLoad();" bgcolor="#FFFFFF">
+		<div id="maindiv" name="maindiv" title="Background animation">
+			<p>Simple little controller</p>
+			<button name="startClick" onclick="runAnim('start')">Start the animation</button>
+			<button name="stopClick" onclick="runAnim('stop')">Stop the animation</button>
+		</div>
+		
+		<script src="/jquery/dist/jquery.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+		<script>  
+		 var socket = io.connect('http://localhost:4200');
+		 socket.on('connect', function(data) {
+			socket.emit('join', 'Hello from Controller');
+			socket.on('messages', function(data) {
+                //alert(data);
+			});
+		 });
+		 </script>  
+	</body>
+</html>
