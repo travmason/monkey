@@ -36,6 +36,12 @@ io.on('connection', function(client) {
 					console.log('Stop from controller');
 					io.emit('command', 'stop');		
 					break;
+				case 'torchon':
+					io.emit('command', 'torchon');
+					break;
+				case 'torchoff':
+					io.emit('command', 'torchoff');		
+					break;
 			}
 		});
     });

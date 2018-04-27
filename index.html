@@ -9,7 +9,8 @@
 		<script type="text/javascript" charset="utf-8">
             function onLoad()
             {
-                  document.addEventListener("deviceready", onDeviceReady, true);
+                document.addEventListener("deviceready", onDeviceReady, true);
+	  			window.plugins.insomnia.keepAwake();
             }
 
             function exitFromApp()
@@ -49,18 +50,10 @@
 		</style>
     </head>
     <body onload="onLoad();" bgcolor="#000000" id="mybody">
-        <script type="text/javascript" src="cordova.js"></script>
 		<div id="maindiv" name="maindiv">
 			<button name="buttonClick" onclick="exitFromApp()">Exit App</button>
 		</div>
-		
-		<!--
-		<button onclick="window.plugins.insomnia.keepAwake()">keep awake</button>
-		<button onclick="window.plugins.insomnia.allowSleepAgain()">allow sleep again</button>
-        -->
-		<script type="text/javascript">
-			window.plugins.insomnia.keepAwake();
-		</script>
+		<script type="text/javascript" src="cordova.js"></script>
 		<script src="/jquery/dist/jquery.js"></script>
         <script src="/socket.io/socket.io.js"></script>
 		<script>  
@@ -68,18 +61,36 @@
 			
 			var socket = io.connect('http://www.monkeyandthemoose.com');
 			socket.on('connect', function(data) {
-				socket.emit('join', 'Hello from Client');
+				//socket.emit('join', 'Hello from Client');
 				socket.on('command', function(data) {
 					switch (data) {
 					case 'start':
 						d.className += " AnimationStyle";
 						break;
-					default:
+					case 'stop':
 						d.className = d.className.replace(/\bAnimationStyle\b/g, "");
+						break;
+					case 'torchon':
+						window.plugins.flashlight.available(function(isAvailable) {
+						  if (isAvailable) {
+							window.plugins.flashlight.switchOn();
+						  } else {
+							socket.emit('message', 'Torch not available on this device');
+						  }
+						});
+						break;
+					case 'torchoff':
+						window.plugins.flashlight.available(function(isAvailable) {
+						  if (isAvailable) {
+							window.plugins.flashlight.switchOff();
+						  } else {
+							socket.emit('message', 'Torch not available on this device');
+						  }
+						});
+						break;
 					}
 				});
 		 });
 		</script>  
-        <!--<script type="text/javascript" src="window.plugins.insomnia.allowSleepAgain()"></script>-->
 	</body>
 </html>

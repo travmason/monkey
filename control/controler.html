@@ -15,6 +15,9 @@
 			<p>Simple little controller</p>
 			<button name="startClick" onclick="runAnim('start')">Start the animation</button>
 			<button name="stopClick" onclick="runAnim('stop')">Stop the animation</button>
+			<br>
+			<button name="torchonClick" onclick="runAnim('torchon')">Turn on the Torches</button>
+			<button name="torchoffClick" onclick="runAnim('torchoff')">Turn off the Torches</button>	
 		</div>
 		
 		<script src="/jquery/dist/jquery.js"></script>
@@ -22,9 +25,10 @@
 		<script>  
 		 var socket = io.connect('http://www.monkeyandthemoose.com');
 		 socket.on('connect', function(data) {
-			socket.emit('join', 'Hello from Controller');
+			//socket.emit('join', 'Hello from Controller');
 			socket.on('messages', function(data) {
                 //alert(data);
+				//We do nothing in response to server messages sent to us.
 			});
 		 });
 		 </script>  
