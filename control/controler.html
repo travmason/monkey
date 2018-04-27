@@ -20,7 +20,7 @@
 		<script src="/jquery/dist/jquery.js"></script>
         <script src="/socket.io/socket.io.js"></script>
 		<script>  
-		 var socket = io.connect('http://localhost:4200');
+		 var socket = io.connect('http://www.monkeyandthemoose.com');
 		 socket.on('connect', function(data) {
 			socket.emit('join', 'Hello from Controller');
 			socket.on('messages', function(data) {
