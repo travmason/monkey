@@ -20,10 +20,38 @@
              }
 
         </script>
+		<style>
+			/* The animation code */
+			@keyframes bgfades {
+				0%   {background-color: white;}
+				10%  {background-color: yellow;}
+				20%  {background-color: lightskyblue;}
+				30% {background-color: lightgreen;}
+				40%   {background-color: yellow;}
+				50%  {background-color: white;}
+				60%  {background-color: lightskyblue;}
+				70% {background-color: lightgreen;}
+				80%  {background-color: lightcyan;}
+				90%  {background-color: snow;}
+				100%  {background-color: white;}
+				}
+
+			/* The element to apply the animation to */
+			.AnimationStyle {
+				width: 100%;
+				height: 1000px;
+				padding: 0px, 0px, 0px, 0px;
+				margin: 0px, 0px, 0px, 0px;
+				background-color: white;
+				animation-name: bgfades;
+				animation-duration: 25s;
+				animation-iteration-count: infinite;
+			}
+		</style>
     </head>
     <body onload="onLoad();" bgcolor="#FFFFFF">
         <script type="text/javascript" src="cordova.js"></script>
-		<div class="animatethis" id="maindiv" name="maindiv" title="Background animation">
+		<div class="AnimationStyle" id="maindiv" name="maindiv" title="Background animation">
 			<p>Leave this app open!</p>
 			<button name="buttonClick" onclick="exitFromApp()">Exit App</button>
 		</div>
@@ -38,7 +66,7 @@
 		<script src="/jquery/dist/jquery.js"></script>
         <script src="/socket.io/socket.io.js"></script>
 		<script>  
-		 var socket = io.connect('http://monkeyandthemoose.com');
+		 var socket = io.connect('http://localhost:4200');
 		 socket.on('connect', function(data) {
 			socket.emit('join', 'Hello World from client');
 			socket.on('messages', function(data) {
