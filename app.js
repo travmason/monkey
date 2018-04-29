@@ -18,9 +18,7 @@ server = app.listen(port, function () {
   console.log('   app listening on http://' + addr.address + ':' + addr.port);
 });  
 var io = require('socket.io')(server);
-  io.configure(function() {
-    io.set('match origin protocol', true);
-  });
+
 io.on('connection', function(client) {  
 	client.on('join', function(data) {
 			console.log(data);
