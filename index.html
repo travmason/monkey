@@ -87,7 +87,7 @@
 			
 			var socket = io.connect('//www.monkeyandthemoose.com');
 			socket.on('connect', function(data) {
-				//socket.emit('join', 'Hello from Client');
+				socket.emit('join', 'Hello from Client');
 				socket.on('command', function(data) {
 					switch (data) {
 					case 'start':
