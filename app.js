@@ -25,7 +25,8 @@ io.on('connection', function(client) {
 			io.emit('message', 'Hello from the Server');
 		});
 	client.on('controller', function(data) {
-			switch (data) {
+		io.emit('command', data);
+/*			switch (data) {
 				default:
 					console.log('Unknown command from controller');
 				case 'start':
@@ -42,6 +43,6 @@ io.on('connection', function(client) {
 				case 'torchoff':
 					io.emit('command', 'torchoff');		
 					break;
-			}
+			}*/
 		});
     });

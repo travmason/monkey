@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <title>ProductionAV</title>
-      <script type="text/javascript">
 
 		<script type="text/javascript" charset="utf-8">
             function onLoad()
@@ -35,6 +34,14 @@
 				90%  {background-color: snow;}
 				100%  {background-color: white;}
 				}
+				
+			.bodyTransition {
+			    -webkit-transition: all 5s ease-in-out;
+				-moz-transition: all 5s ease-in-out;
+				-o-transition: all 5s ease-in-out;
+				-ms-transition: all 5s ease-in-out;
+				transition: all 5s ease-in-out;
+				}
 
 			/* The element to apply the animation to */
 			.AnimationStyle {
@@ -49,23 +56,21 @@
 			}
 		</style>
     </head>
-    <body onload="onLoad();" bgcolor="#000000" id="mybody">
+    <body onload="onLoad();" bgcolor="#FFFFFF" id="mybody" class="bodyTransition">
 		<div id="maindiv" name="maindiv">
 			<button name="buttonClick" onclick="exitFromApp()">Exit App</button>
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script src="/jquery/dist/jquery.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-		<script src="../dist/NoSleep.min.js"></script>
+		<script src="nosleep.js/dist/NoSleep.min.js"></script>
 
     <input type="button" id="toggle" value="Wake Lock is disabled" />
     <script>
 	  console.log('here 0');
-	  alert('here 0');
       var noSleep = new NoSleep();
       var wakeLockEnabled = false;
       var toggleEl = document.querySelector("#toggle");
-	  alert('here 1');
       toggleEl.addEventListener('click', function() {
         if (!wakeLockEnabled) {
 			alert('Locking wake!');
@@ -90,6 +95,15 @@
 				socket.emit('join', 'Hello from Client');
 				socket.on('command', function(data) {
 					switch (data) {
+					case 'blue':
+						d.style.background = 'blue';
+						break;
+					case 'black':
+						d.style.background = 'black';
+						break;
+					case 'white':
+						d.style.background = 'white';
+						break;
 					case 'start':
 						d.className += " AnimationStyle";
 						break;
