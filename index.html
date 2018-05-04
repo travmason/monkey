@@ -9,31 +9,63 @@
             function onLoad()
             {
                 document.addEventListener("deviceready", onDeviceReady, true);
-	  			window.plugins.insomnia.keepAwake();
             }
+			
+			function onDeviceReady() {
+				// Now safe to use the PhoneGap API
+                document.addEventListener("pause", onPause, false);
+                document.addEventListener("resume", onResume, false);
+                document.addEventListener("online", onOnline, false);
+                document.addEventListener("offline", onOffline, false);
+				
+	  			window.plugins.insomnia.keepAwake();
+				
+				window.plugins.flashlight.available(function(isAvailable) {
+				  if (isAvailable) {
+					window.plugins.flashlight.switchOn();
+				  } else {
+					alert('Torch not available on this device');
+				  }
+				});
+			}
+			
+			function onPause() {
+				window.plugins.insomnia.allowSleepAgain();
+			}
+			
+			function onResume() {
+				// Handle the resume event
+	  			window.plugins.insomnia.keepAwake();
+			}
+			
+			function onOnline() {
+				// Handle the resume event
+			}
+
+			function onOffline() {
+				// Handle the resume event
+			}
 
             function exitFromApp()
              {
+				socket.emit('message', 'Device exiting app');
+				//Let the phone sleep again
 				window.plugins.insomnia.allowSleepAgain();
+				//Turn off the torch if it is on
+				window.plugins.flashlight.available(function(isAvailable) {
+				  if (isAvailable) {
+					window.plugins.flashlight.switchOff();
+				  } else {
+					socket.emit('message', 'Torch not available on this device');
+				  }
+				});
+				//Exit the app
                 navigator.app.exitApp();
              }
 
         </script>
 		<style>
-			/* The animation code 
-			@keyframes bgfades {
-				0%   {background-color: white;}
-				10%  {background-color: yellow;}
-				20%  {background-color: lightskyblue;}
-				30% {background-color: lightgreen;}
-				40%   {background-color: yellow;}
-				50%  {background-color: white;}
-				60%  {background-color: lightskyblue;}
-				70% {background-color: lightgreen;}
-				80%  {background-color: lightcyan;}
-				90%  {background-color: snow;}
-				100%  {background-color: white;}
-				}  */
+			/* The animation code */
 				
 			@keyframes bgfades {
 				0%  {background-color: lightskyblue;}
@@ -41,7 +73,6 @@
 				100%  {background-color: lightskyblue;}
 				}
 
-				
 			.bodyTransition {
 			    -webkit-transition: all 5s ease-in-out;
 				-moz-transition: all 5s ease-in-out;
@@ -56,7 +87,7 @@
 				height: 100%;
 				padding: 0px, 0px, 0px, 0px;
 				margin: 0px, 0px, 0px, 0px;
-				background-color: lightskyblue;
+				background-color: skyblue;
 				animation-name: bgfades;
 				animation-duration: 2s;
 				animation-iteration-count: infinite;
@@ -74,7 +105,7 @@
 
     <input type="button" id="toggle" value="Wake Lock is disabled" />
     <script>
-	  console.log('here 0');
+	  console.log('Locking wake');
       var noSleep = new NoSleep();
       var wakeLockEnabled = false;
       var toggleEl = document.querySelector("#toggle");

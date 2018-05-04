@@ -25,24 +25,7 @@ io.on('connection', function(client) {
 			io.emit('message', 'Hello from the Server');
 		});
 	client.on('controller', function(data) {
-		io.emit('command', data);
-/*			switch (data) {
-				default:
-					console.log('Unknown command from controller');
-				case 'start':
-					console.log('Start from controller');
-					io.emit('command', 'start');
-					break;
-				case 'stop':
-					console.log('Stop from controller');
-					io.emit('command', 'stop');		
-					break;
-				case 'torchon':
-					io.emit('command', 'torchon');
-					break;
-				case 'torchoff':
-					io.emit('command', 'torchoff');		
-					break;
-			}*/
+			//Pass through commands to the client without checking !!
+			io.emit('command', data);
 		});
     });
