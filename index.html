@@ -20,7 +20,7 @@
 
         </script>
 		<style>
-			/* The animation code */
+			/* The animation code 
 			@keyframes bgfades {
 				0%   {background-color: white;}
 				10%  {background-color: yellow;}
@@ -33,7 +33,14 @@
 				80%  {background-color: lightcyan;}
 				90%  {background-color: snow;}
 				100%  {background-color: white;}
+				}  */
+				
+			@keyframes bgfades {
+				0%  {background-color: lightskyblue;}
+				50%   {background-color: white;}
+				100%  {background-color: lightskyblue;}
 				}
+
 				
 			.bodyTransition {
 			    -webkit-transition: all 5s ease-in-out;
@@ -49,14 +56,14 @@
 				height: 100%;
 				padding: 0px, 0px, 0px, 0px;
 				margin: 0px, 0px, 0px, 0px;
-				background-color: black;
+				background-color: lightskyblue;
 				animation-name: bgfades;
-				animation-duration: 25s;
+				animation-duration: 2s;
 				animation-iteration-count: infinite;
 			}
 		</style>
     </head>
-    <body onload="onLoad();" bgcolor="#FFFFFF" id="mybody" class="bodyTransition">
+    <body onload="onLoad();" bgcolor="#FFFFFF" id="mybody">
 		<div id="maindiv" name="maindiv">
 			<button name="buttonClick" onclick="exitFromApp()">Exit App</button>
 		</div>
@@ -73,17 +80,13 @@
       var toggleEl = document.querySelector("#toggle");
       toggleEl.addEventListener('click', function() {
         if (!wakeLockEnabled) {
-			alert('Locking wake!');
           noSleep.enable(); // keep the screen on!
           wakeLockEnabled = true;
           toggleEl.value = "Wake Lock is enabled";
-          document.body.style.backgroundColor = "green";
         } else {
-			alert('Unlocking wake!');
           noSleep.disable(); // let the screen turn off.
           wakeLockEnabled = false;
           toggleEl.value = "Wake Lock is disabled";
-          document.body.style.backgroundColor = "";
         }
       }, false);
     </script>
@@ -96,12 +99,15 @@
 				socket.on('command', function(data) {
 					switch (data) {
 					case 'blue':
-						d.style.background = 'blue';
+						d.className += " bodyTransition";
+						d.style.background = 'skyblue';
 						break;
 					case 'black':
+						d.className = "";
 						d.style.background = 'black';
 						break;
 					case 'white':
+						d.className = "";
 						d.style.background = 'white';
 						break;
 					case 'start':
@@ -111,6 +117,8 @@
 						d.className = d.className.replace(/\bAnimationStyle\b/g, "");
 						break;
 					case 'torchon':
+						d.className = "";
+						d.style.background = 'black';
 						window.plugins.flashlight.available(function(isAvailable) {
 						  if (isAvailable) {
 							window.plugins.flashlight.switchOn();
@@ -120,6 +128,8 @@
 						});
 						break;
 					case 'torchoff':
+						d.className = "";
+						d.style.background = 'black';
 						window.plugins.flashlight.available(function(isAvailable) {
 						  if (isAvailable) {
 							window.plugins.flashlight.switchOff();
