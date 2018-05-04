@@ -114,7 +114,9 @@
 						d.className += " AnimationStyle";
 						break;
 					case 'stop':
+						d.className += " bodyTransition";
 						d.className = d.className.replace(/\bAnimationStyle\b/g, "");
+						d.style.background = 'skyblue';
 						break;
 					case 'torchon':
 						d.className = "";
